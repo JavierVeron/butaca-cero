@@ -1,7 +1,26 @@
 # Plan: Blog de Series y Películas con posts automáticos (CrewAI) — versión gratuita
 
 ## Context
-Blog en español donde los artículos (reseñas, curiosidades, listas) se generan solos con un equipo de agentes CrewAI. Cada post lleva imagen destacada + imagen en el cuerpo. Catálogo: series y películas de cualquier época, **excluyendo India y China** y **sin documentales**. Géneros: comedia, terror, ciencia ficción, acción, romántica. La web muestra posts, con buscador y filtro por género. Es un proyecto de prueba: **todo gratis salvo los créditos de Claude** (el usuario ya los tiene). Nombre del blog pendiente. Carpeta de trabajo: `C:\DESARROLLO\EDUCACIONIT\89878\MULTI_AGENTES` (vacía; el usuario pidió guardar este plan como `PLAN.md` ahí).
+Blog en español donde los artículos (reseñas, curiosidades, listas) se generan solos con un equipo de agentes CrewAI. Cada post lleva imagen destacada + imagen en el cuerpo. Catálogo: series y películas de cualquier época, **excluyendo India y China** y **sin documentales**. Géneros: comedia, terror, ciencia ficción, acción, romántica. La web muestra posts, con buscador y filtro por género. Es un proyecto de prueba: **todo gratis salvo los créditos de Claude** (el usuario ya los tiene). Nombre del blog: **Butaca Cero**. Carpeta de trabajo: `C:\DESARROLLO\EDUCACIONIT\89878\MULTI_AGENTES`. Repositorio: https://github.com/JavierVeron/butaca-cero
+
+## Estado actual (actualizado 2026-10-24)
+**Fase actual: Fase 0 casi completa. Pausado; se retoma la semana siguiente.**
+
+Hecho:
+- [x] Plan definido (stack, 8 agentes, posts a demanda, límite de 250 palabras, Haiku para todo).
+- [x] Nombre elegido: Butaca Cero; sin dominio propio (URL gratuita de GitHub Pages: `https://JavierVeron.github.io/butaca-cero/`).
+- [x] Estructura de carpetas, `.gitignore`, `.env.example`, `README.md`, `generador/pyproject.toml`.
+- [x] Repositorio público `butaca-cero` creado y primer commit subido a `main`.
+- [x] `.env` local con `ANTHROPIC_API_KEY` y `TMDB_API_KEY` (verificada con una consulta real a TMDB; no se sube al repo).
+
+Pendiente para cerrar la Fase 0:
+- [ ] Crear la hoja de Google Sheets (pestaña `posts`, con las columnas definidas) y pasar su ID.
+- [ ] Crear la service account de Google, descargar `credenciales-google.json` a `MULTI_AGENTES` y compartir la hoja con su email como Editor.
+- [ ] Decidir la versión de Python: instalar 3.12 o 3.13 (CrewAI puede no soportar la 3.14 instalada; `requires-python` está en `>=3.11,<3.14`).
+- [ ] Revocar y regenerar la clave de Anthropic (quedó expuesta en el chat) y fijar un límite mensual de gasto en la consola de Anthropic. Opcional: regenerar la de TMDB.
+
+Próximo paso (Fase 1): cliente TMDB + `filters.py` (IN/CN, documental, mapeo de categorías) con tests, `validate_post` y `sheets.py`.
+Decisión abierta: el género TMDB de acción (10759 en series) es amplio; propuesta: priorizar títulos de acción pura sobre mezclas con comedia o animación.
 
 ## Decisiones tomadas
 - **LLM**: Claude (vía CrewAI/LiteLLM), **Haiku 5.5 (`claude-haiku-5-5`) para todos los agentes** (mínimo costo). El modelo de cada agente es configurable en `agents.yaml`; si la calidad del Redactor no alcanza, se sube solo ese agente.
