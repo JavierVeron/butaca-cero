@@ -81,33 +81,36 @@ En el build, Astro genera un `indice.json` liviano (título, tipo, año, categor
 - Buscador: coincidencia mientras se escribe (Fuse.js o Pagefind, tolerante a acentos); combinable con el filtro de género y de tipo (película/serie).
 
 ## Fases
-**Fase 0 – Fundamentos y nombre**
-- Carpeta `MULTI_AGENTES`, `PLAN.md`, repo en GitHub, `.env` (ANTHROPIC_API_KEY, TMDB_API_KEY, credenciales Google).
-- Cuentas/claves: TMDB (gratis), Google Cloud service account + Sheets API (gratis), GitHub.
-- **Nombre elegido: Butaca Cero.** Repositorio público `butaca-cero`; URL gratuita `https://JavierVeron.github.io/butaca-cero/` (sin comprar dominio por ahora; en Astro se configura `site` y `base: '/butaca-cero'`).
+**Fase 0 – Fundamentos y nombre** (🟡 en curso)
+- [x] Carpeta `MULTI_AGENTES`, `PLAN.md`, repo en GitHub, `.env` base.
+- [x] Clave de Anthropic y clave de TMDB en `.env` (TMDB probada).
+- [ ] Credenciales de Google (service account + Sheets API) y ID de la hoja.
+- [ ] Python 3.12/3.13 instalado.
+- [ ] Clave de Anthropic regenerada + límite mensual de gasto.
+- [x] **Nombre elegido: Butaca Cero.** Repositorio público `butaca-cero`; URL gratuita `https://JavierVeron.github.io/butaca-cero/` (sin comprar dominio por ahora; en Astro se configura `site` y `base: '/butaca-cero'`).
 
 **Fase 1 – Datos y filtros**
-- Cliente TMDB + `filters.py` (IN/CN, documental, mapeo de categorías) con tests.
-- Validador de post (`validate_post`): cuerpo ≤ 250 palabras, 2 imágenes distintas, categoría válida; si falla, el Redactor reintenta (máx. 2).
-- Hoja de Google creada con las columnas definidas; módulo `sheets.py` (leer/agregar).
+- [ ] Cliente TMDB + `filters.py` (IN/CN, documental, mapeo de categorías) con tests.
+- [ ] Validador de post (`validate_post`): cuerpo ≤ 250 palabras, 2 imágenes distintas, categoría válida; si falla, el Redactor reintenta (máx. 2).
+- [ ] Hoja de Google creada con las columnas definidas; módulo `sheets.py` (leer/agregar).
 
 **Fase 2 – Pipeline CrewAI (CLI local)**
-- `agents.yaml`, `tasks.yaml`, `crew.py`, tools. Comando automático: `python generate.py --categoria terror --n 1`.
-- Comando a demanda: `python generate.py --pedido "5 series de acción de USA"` (agente Intérprete de pedidos).
-- Resultado: filas nuevas en Sheets.
+- [ ] `agents.yaml`, `tasks.yaml`, `crew.py`, tools. Comando automático: `python generate.py --categoria terror --n 1`.
+- [ ] Comando a demanda: `python generate.py --pedido "5 series de acción de USA"` (agente Intérprete de pedidos).
+- [ ] Resultado: filas nuevas en Sheets.
 
 **Fase 3 – Web (Astro)**
-- Home, página de post (imagen destacada arriba + imagen en el cuerpo), `/categoria/{slug}`, buscador + filtros, atribución TMDB, sitemap/SEO básico. Datos leídos desde el Sheet en build.
+- [ ] Home, página de post (imagen destacada arriba + imagen en el cuerpo), `/categoria/{slug}`, buscador + filtros, atribución TMDB, sitemap/SEO básico. Datos leídos desde el Sheet en build.
 
 **Fase 4 – Publicación gratuita**
-- Deploy en GitHub Pages con GitHub Actions.
+- [ ] Deploy en GitHub Pages con GitHub Actions.
 
 **Fase 5 – Automatización**
-- Workflow con cron: genera N posts/día (rotando categorías) → escribe en Sheet → rebuild y deploy. Secrets en GitHub. Tope de posts diarios y de gasto.
-- Segundo workflow manual (`workflow_dispatch`) con input de texto para generar un post a demanda.
+- [ ] Workflow con cron: genera N posts/día (rotando categorías) → escribe en Sheet → rebuild y deploy. Secrets en GitHub. Tope de posts diarios y de gasto.
+- [ ] Segundo workflow manual (`workflow_dispatch`) con input de texto para generar un post a demanda.
 
 **Fase 6 – Calidad y extras**
-- Revisión manual (`estado=draft` por defecto al inicio), manejo de errores/reintentos, páginas legales mínimas; luego: "dónde ver", listas, links entre posts relacionados.
+- [ ] Revisión manual (`estado=draft` por defecto al inicio), manejo de errores/reintentos, páginas legales mínimas; luego: "dónde ver", listas, links entre posts relacionados.
 
 ## Estructura propuesta
 ```
