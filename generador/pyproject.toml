@@ -1,0 +1,13 @@
+[project]
+name = "blog-generador"
+version = "0.1.0"
+description = "Generador de posts de series y películas con CrewAI"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "crewai",
+    "httpx",
+    "gspread",
+    "python-dotenv",
+    "pydantic",
+    "pytest",
+]

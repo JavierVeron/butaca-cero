@@ -1,0 +1,10 @@
+.env
+credenciales-google.json
+*.json.key
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+web/dist/
+web/.astro/
